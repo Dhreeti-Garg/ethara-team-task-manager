@@ -1,18 +1,18 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://ethara-team-task-manager-production-3a83.up.railway.app/api",
 });
 
-// Automatically attach JWT token
-API.interceptors.request.use((req) => {
+// ✅ attach token to every request
+API.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (user?.token) {
-    req.headers.Authorization = `Bearer ${user.token}`;
+  if (user && user.token) {
+    config.headers.Authorization = `Bearer ${user.token}`;
   }
 
-  return req;
+  return config;
 });
 
 export default API;
