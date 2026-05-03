@@ -1,5 +1,3 @@
-// src/pages/Register.jsx
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -12,7 +10,7 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    role: "member",
+    role: "Member",
   });
 
   const handleChange = (e) => {
@@ -26,13 +24,15 @@ function Register() {
     e.preventDefault();
 
     try {
-      await API.post("/auth/register", form);
+      await API.post("/auth/register", {
+        ...form,
+        role: form.role === "Member" ? "Member" : "Admin",
+      });
+
       toast.success("Registration successful!");
       navigate("/");
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Registration failed"
-      );
+      toast.error(error.response?.data?.message || "Registration failed");
     }
   };
 
@@ -79,7 +79,6 @@ function Register() {
           style={styles.input}
         >
           <option value="Member">Team Member</option>
-          <option value="Manager">Project Manager</option>
           <option value="Admin">Administrator</option>
         </select>
 
