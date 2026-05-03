@@ -78,9 +78,9 @@ function Register() {
           onChange={handleChange}
           style={styles.input}
         >
-          <option value="member">Team Member</option>
-          <option value="manager">Project Manager</option>
-          <option value="admin">Administrator</option>
+          <option value="Member">Team Member</option>
+          <option value="Manager">Project Manager</option>
+          <option value="Admin">Administrator</option>
         </select>
 
         <button type="submit" style={styles.button}>
